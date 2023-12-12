@@ -1,8 +1,11 @@
 $(function () {
   // 대상을 변수에 저장
   const $window = $(window);
-  const $cursor = $('.cursor');
-  const $info = $('.info');
+  const $objWrap = $('.obj-wrap');
+  const $obj1 = $objWrap.find('.obj1');
+  const $obj2 = $objWrap.find('.obj2');
+  const $obj3 = $objWrap.find('.obj3');
+  const $obj4 = $objWrap.find('.obj4');
 
   // 마우스 좌표값
   let x = 0;
@@ -11,7 +14,7 @@ $(function () {
   // 보정되는 마우스 좌표값
   let mx = 0;
   let my = 0;
-  let speed = 0.08;
+  let speed = 0.008;
 
   // 마우스가 움직일 때 좌표값 받아오기
   $window.on('mousemove', function (e) {
@@ -32,12 +35,19 @@ $(function () {
 
     // A += B --> A = A + B
 
-    // info창에 뿌리기
-    $info.html(`mx : ${mx}<br>my : ${my}`);
-
-    // 마우스에 좌표값 적용
-    $cursor.css({
-      Transform: `translate(${mx}px, ${my}px)`,
+    // 오브젝트에 좌표값 적용
+    $obj1.css({
+      Transform: `translate(${mx}px, ${my}px) rotate(${my}deg)`,
+    });
+    $obj2.css({
+      Transform: `translate3d(${-mx}px, ${-my}px, ${mx}px)`,
+    });
+    $obj3.css({
+      Transform: `translate3d(${-mx * 0.5}px, ${my * 0.7}px, ${mx * 0.05}px) rotateY(${mx}deg)`,
+    });
+    $obj4.css({
+      Transform: `translate3d(${mx / 0.5}px, ${-my / 0.7}px, 0px) `,
+      filter: `blur(${-mx * 0.05}px)`,
     });
 
     // 부드럽게 반복
